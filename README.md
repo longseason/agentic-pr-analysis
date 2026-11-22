@@ -1,6 +1,5 @@
 # agentic-pr-analysis
 
-<<<<<<< HEAD
 Analysis of AI-agent pull requests from [AIDev](https://huggingface.co/datasets/hao-li/AIDev), release v5.
 
 ## Pipeline
@@ -53,7 +52,6 @@ CPU figure from a 500-PR run on a Colab CPU VM (2 vCPU): at most 2.6 PRs/s.
 Labeling is chunked automatically. Each parquet row group (200K PRs, ~17 min on T4) is streamed from HF,
 labeled, and saved to `<out>_chunks/`. A killed run resumes on rerun with the same `--out`.
 Chunks merge into `<out>` and the chunk dir is removed when all are done.
-=======
 ## Clustering pull requests
 
 After generating `data/processed/prs.parquet` with `src/data.py`, run:
@@ -75,4 +73,3 @@ Clustering is exploratory: it does not train a model to predict an agent or
 whether a pull request will merge. Use a supervised classifier and held-out
 evaluation for that prediction goal. The dataset's `agent` field identifies the
 agent/tool category and may not identify the underlying language model.
->>>>>>> origin/dev
