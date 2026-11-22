@@ -1,7 +1,12 @@
 datasets
 pandas
 pyarrow
+<<<<<<< HEAD
 torch
 transformers
 scikit-learn
 huggingface_hub
+=======
+scikit-learn
+matplotlib
+>>>>>>> origin/dev
