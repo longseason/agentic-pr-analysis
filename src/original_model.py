@@ -72,6 +72,13 @@ def final_eval(X_train, X_test, y_train, y_test):
 
     coefs = pd.Series(model.coef_[0], index=X_train.columns).sort_values()
     print(coefs)
+
+    check = pd.DataFrame({"predicted": probs, "actual": y_test.to_numpy()})
+    check["bucket"] = pd.cut(check["predicted"], bins=np.arange(0, 1.05, 0.1))
+    print(check.groupby("bucket", observed=True).agg(n=("actual", "size"),
+                                                     predicted=("predicted", "mean"),
+                                                     actual=("actual", "mean")).round(3))
+
     return model, coefs
 
 def merge_rates(df, min_prs=50):

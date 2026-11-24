@@ -52,7 +52,7 @@ def build_features(df):
     lang = lang.where(lang.isin(top_langs), "Other")
     X = X.join(pd.get_dummies(lang, prefix="lang", dtype=int))
 
-    # X["log_user_prior_prs"] = np.log1p(df.groupby("user")["created_at"].rank(method="first") - 1)
+    X["log_user_prior_prs"] = np.log1p(df.groupby("user")["created_at"].rank(method="first") - 1)
 
     y = df["merged"].astype(int)
     groups = df["repo_id"]
@@ -94,6 +94,13 @@ def final_eval(X_train, X_test, y_train, y_test):
 
     coefs = pd.Series(model.coef_[0], index=X_train.columns).sort_values()
     print(coefs)
+
+    check = pd.DataFrame({"predicted": probs, "actual": y_test.to_numpy()})
+    check["bucket"] = pd.cut(check["predicted"], bins=np.arange(0, 1.05, 0.1))
+    print(check.groupby("bucket", observed=True).agg(n=("actual", "size"),
+                                                     predicted=("predicted", "mean"),
+                                                     actual=("actual", "mean")).round(3))
+
     return model, coefs
 
 def merge_rates(df, min_prs=50):
