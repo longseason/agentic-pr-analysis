@@ -43,15 +43,6 @@ def split(X, y, groups, test_size=0.2, seed=42):
             y.iloc[train_idx], y.iloc[test_idx],
             groups.iloc[train_idx])
 
-def fake_prs(n=5000, seed=0):
-    rng = np.random.default_rng(seed)
-    return pd.DataFrame({
-        "repo_id": rng.integers(0, 300, n),
-        "agent": rng.choice(["Codex", "Copilot", "Claude Code", "Cursor", "Jules", "Devin"], n),
-        "task_type": rng.choice(["fix", "feat", "docs", "chore", "refactor", "test"], n),
-        "merged": rng.random(n) < 0.6,
-    })
-
 def cross_validate(X_train, y_train, g_train, folds=5):
     model = LogisticRegression(max_iter=1000)
     cv = GroupKFold(n_splits=folds)
