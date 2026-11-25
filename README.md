@@ -12,6 +12,18 @@ cd src && python data.py
 `src/data.py` downloads v5 `pull_request`, `pr_reviews`, `repository`, `pr_timeline` into `data/raw/`,
 adds task types, and writes `data/processed/prs.parquet` plus the other tables.
 
+## Merge models and evaluation
+
+```bash
+cd src
+python original_model.py   # agent + task type logistic regression
+python new_model.py        # adds repository and author-history features
+python evaluate.py         # 5 repo-grouped seeds, LR vs GBT, ablation, temporal split, bootstrap, calibration
+```
+
+`src/evaluate.py` writes `results/grouped_summary.csv`, `results/extra.json`,
+`results/calibration.png` and `results/merge_rates.png`; these back every number in the paper.
+
 ## Task types
 
 AIDev dropped the `pr_task_type` table after v3. Task types for v5 come from a BERT classifier
