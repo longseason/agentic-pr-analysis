@@ -1,0 +1,41 @@
+{
+ "temporal": {
+  "cutoff": "2026-03-08 05:48:11+00:00",
+  "test_merge_rate": 0.7792936433921964,
+  "logreg agent+task": {
+   "auroc": 0.541,
+   "macro_f1": 0.438,
+   "acc": 0.779,
+   "brier": 0.173,
+   "ece": 0.024
+  },
+  "logreg full": {
+   "auroc": 0.721,
+   "macro_f1": 0.548,
+   "acc": 0.793,
+   "brier": 0.152,
+   "ece": 0.021
+  },
+  "gbt agent+task": {
+   "auroc": 0.548,
+   "macro_f1": 0.438,
+   "acc": 0.779,
+   "brier": 0.173,
+   "ece": 0.028
+  },
+  "gbt full": {
+   "auroc": 0.739,
+   "macro_f1": 0.596,
+   "acc": 0.799,
+   "brier": 0.148,
+   "ece": 0.017
+  }
+ },
+ "bootstrap": {
+  "delta_auroc": 0.087,
+  "ci95": [
+   0.067,
+   0.108
+  ]
+ }
+}
